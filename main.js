@@ -45,7 +45,6 @@ function operatorClick(e)
   isOperatorClicked = true;
 }
 
-// For equals button
 function evaluate(operator) 
 {
   let operandText = operand.textContent;
@@ -84,9 +83,14 @@ function operate()
       break;   
   }
 
+  if (!!(firstOperand % 1)) firstOperand = roundOff(firstOperand);
   operand.textContent = firstOperand;
   firstOperator = secondOperator;
   secondOperand = secondOperator = null;
+}
+
+function roundOff(value) {
+  return Math.round((value + Number.EPSILON) * 100) / 100;
 }
 
 // For clear button
