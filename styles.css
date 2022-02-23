@@ -62,9 +62,9 @@ h1 {
 #equals:hover { background-color: #aecbfa; }
 #equals:active { background-color: #cde0fd; }
 
-#clear { background-color: rgb(253, 181, 181); }
-#clear:hover { background-color: rgb(248, 201, 201); }
-#clear:active { background-color: rgb(245, 190, 190); }
+#reset { background-color: rgb(253, 181, 181); }
+#reset:hover { background-color: rgb(248, 201, 201); }
+#reset:active { background-color: rgb(245, 190, 190); }
 
 .operator { background-color: rgb(196, 182, 182); }
 .operator:hover { background-color: rgb(175, 153, 153); }
