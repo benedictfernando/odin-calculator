@@ -8,3 +8,23 @@ h1 {
   height: 400px;
   margin: 0 auto;
 }
+
+#buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+#buttons > button {
+  border: 1px solid black;
+  display: block;
+  width: 50px;
+  height: 50px;
+}
+
+#buttons > button:nth-child(4n) {
+  page-break-after: always;
+  break-after: always;
+}
