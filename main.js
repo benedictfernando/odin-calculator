@@ -4,10 +4,9 @@ let operand = document.getElementById('operand');
 let numbers = [...document.getElementsByClassName('number')];
 let operators = [...document.getElementsByClassName('operator')];
 let reset = document.getElementById('reset');
-let equals = document.getElementById('equals');
 
 let firstOperand, secondOperand, firstOperator, secondOperator;
-let isOperatorClicked = false;
+let isOperatorClicked = isEqualClicked = false;
 
 
 numbers.forEach(number => {
@@ -26,13 +25,19 @@ reset.addEventListener('click', clear);
 // For number buttons
 function numberClick(e) 
 {
-  if (operand.textContent.length < 8 || isOperatorClicked) 
+  if (operand.textContent.length < 8 || isOperatorClicked || isEqualClicked) 
   {
-    if (operand.textContent == 0 || isOperatorClicked)  
+    if (operand.textContent == 0 || isOperatorClicked || isEqualClicked)  {
       operand.textContent = e.target.textContent;
+
+      if (isEqualClicked) {
+        firstOperand = null;
+        expression.innerHTML = '&nbsp;';
+      }
+    }
     else operand.textContent += e.target.textContent;
   
-    isOperatorClicked = false;
+    isOperatorClicked = isEqualClicked = false;
   }
 }
 
@@ -45,6 +50,7 @@ function operatorClick(e)
   isOperatorClicked = true;
 }
 
+// Assign values to global variables
 function evaluate(operator) 
 {
   let operandText = operand.textContent;
@@ -66,6 +72,7 @@ function changeOperator(operator) {
   expression.textContent = expression.textContent.slice(0, -2) + operator + ' ';
 }
 
+// Execute the operation
 function operate() 
 {
   switch (firstOperator) {
@@ -83,6 +90,8 @@ function operate()
       break;   
   }
 
+  if (secondOperator == '=') isEqualClicked = true;
+  
   if (!!(firstOperand % 1)) firstOperand = roundOff(firstOperand);
   operand.textContent = firstOperand;
   firstOperator = secondOperator;
@@ -103,15 +112,13 @@ function clear()
   isOperatorClicked = false;
 }
 
+// For backspace button
 function keypress(e) 
 {
   switch (e.key) {
     case "Backspace":
       operand.textContent = operand.textContent.slice(0, -1); 
       if (!operand.textContent) operand.textContent = '0';
-      break;
-    case "Enter":
-      console.log("lez g");
       break;
   }
 }
